@@ -25,7 +25,6 @@ window.worldMap = function(selector) {
     .then(function(data) {
       /*global aggregator */
       data = aggregator(data, 'attributes.nationality');
-      console.log(data);
     color.domain([
       d3.min(data, function(d) { return d.value; }),
       d3.max(data, function(d) { return d.value; })

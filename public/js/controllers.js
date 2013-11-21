@@ -112,7 +112,6 @@ function SearchCtrl($scope, $routeParams) {
   });
 
   $scope.searchUser = function() {
-    console.log('search user', $scope.query);
     var query = new Parse.Query(Parse.User);
     query.select("name","description", "fb_username","interests","nationality", "pic_cover");
     var queryResult = query.contains($scope.choices, $scope.query).find();
@@ -177,14 +176,6 @@ function InformationCtrl($scope, $routeParams) {
   var width = 520;
   var height = 400;
   var radius = Math.min(width, height) / 2.3;
-
-  var colors = [
-    '#3E454C', // Charcoal
-    '#2185C5', // Bright Blue
-    '#7ECEFD', // Baby Blue
-    '#FFF6E5', // Almost White
-    '#FF7F66'  // Red
-  ];
   var color = d3.scale.ordinal().range(colors);
 
   var keys = [
@@ -203,7 +194,6 @@ function InformationCtrl($scope, $routeParams) {
   keys.forEach(function(key) {
     var $div = $('<div class="pie-chart"><h4></h4><div class="graph"></div><div class="pieList"></div></div>');
     $div.find('h4').text(key);
-    return;
     var mydata = aggregator(window.data, key);
     mydata.sort(function(a, b) { return b.count - a.count; });
 

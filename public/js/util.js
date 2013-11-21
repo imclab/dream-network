@@ -21,10 +21,10 @@ window.getValue = function(o, key) {
 
   for (var i = 0, len = keys.length; i < len; i++) {
     var value = curr[keys[i]];
-    if (value) {
+    if (typeof value !== 'undefined') {
       curr = value;
     } else {
-      return curr;
+      return null;
     }
   }
 
