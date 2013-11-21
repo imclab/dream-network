@@ -19,7 +19,13 @@ window.worldMap = function(selector) {
     .attr('width', width)
     .attr('height', height);
 
-  d3.csv('/data/birthlocation.csv', function(data) {
+  new Parse.Query(Parse.User)
+    .select('nationality')
+    .find()
+    .then(function(data) {
+      /*global aggregator */
+      data = aggregator(data, 'attributes.nationality');
+      console.log(data);
     color.domain([
       d3.min(data, function(d) { return d.value; }),
       d3.max(data, function(d) { return d.value; })
@@ -30,8 +36,9 @@ window.worldMap = function(selector) {
     //Combine the current location data and GeoJSON
     for (var i = 0; i < data.length; i++) {
   
-      var dataState = data[i].country;
-      var dataValue = parseFloat(data[i].value);
+      var d = data[i];
+      var dataState = d.value;
+      var dataValue = parseFloat(d.count);
       for (var j = 0; j < json.features.length; j++) {
         var jsonState = json.features[j].properties.name;
         if (dataState === jsonState) {
