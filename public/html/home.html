@@ -8,7 +8,13 @@
   </div>
 </div>
 <div class="container">
-    <div class="user-result row">
+  <div class="row" ng-show="randomUser.fbUsername">
+    <h2>
+      DREAMer: insert definition here. copy copy copy.
+    </h2>
+  </div>
+  <hr class="featurette-divider">
+    <div class="user-result row" ng-show="randomUser.fbUsername">
         <div class="col-xs-5">
           <a href="#profile/{{randomUser.id}}"><img class="featurette-image img-responsive" src="https://graph.facebook.com/{{randomUser.fbUsername}}/picture?width=200&height=200"></a>
         </div>
