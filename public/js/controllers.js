@@ -23,7 +23,8 @@ function ProfileCtrl($scope, $routeParams, userSrv) {
         state: user.get('state'),
         age: user.get('age'),
         languages: user.get('languages'),
-        support_reason: user.get('support_reason')
+        support_reason: user.get('support_reason'),
+        coverPhotoUrl : user.get("pic_cover").source
       }
 
       //setup watches
@@ -50,7 +51,7 @@ function SearchCtrl($scope, $routeParams) {
 
   $scope.searchUser = function() {
     var query = new Parse.Query(Parse.User);
-    query.select("name","description", "fb_username","interests","nationality");
+    query.select("name","description", "fb_username","interests","nationality", "pic_cover");
     var queryResult = query.contains($scope.choices, $scope.query).find();
     queryResult.then(function(results) {
       $scope.$apply(function(){
