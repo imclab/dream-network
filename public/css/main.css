@@ -228,4 +228,7 @@ a:hover {
 .flag-container {
   border-radius: 5px;
   background-image: url('../images/flag.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
