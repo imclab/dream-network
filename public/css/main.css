@@ -119,6 +119,10 @@ a:hover {
     text-decoration: none;
 }
 
+.col-xs-5 {
+    width: 260px;
+}
+
 .navbar-nav>li>a {
     padding-top: 24.5px;
     padding-bottom: 16.5px;
@@ -169,6 +173,7 @@ a:hover {
 	background-color: #C2DAEA;
 	border-radius : 10px;
 }
+
 .col-xs-2 .form-control{
 	border-radius: 2px 0px 0px 2px;
 	background-color: transparent;
@@ -200,7 +205,6 @@ a:hover {
 
 .col-xs-3 .btn {
 	border-radius: 12px;
-	box-shadow: -1px 3px 3px #000;
 }
 
 .featurette-heading h2 {
@@ -217,6 +221,6 @@ a:hover {
 
 .user-result {
 	padding: 10px;
-	border: 1px solid #FF7F66;
+	border: 4px solid #C2DAEA;
 	border-radius: 5px 5px 5px 5px;
 }
