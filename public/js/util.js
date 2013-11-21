@@ -47,7 +47,7 @@ window.aggregator = function(data, key) {
   var total = 0;
 
   data.forEach(function(d) {
-    var value = window.getValue(d, key);
+    var value = window.getValue(d.attributes, key);
     var values = typeof value === 'string'
       ? value.split(',').map(function(v) { return v.trim(); })
       : [value];

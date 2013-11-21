@@ -191,8 +191,8 @@ function InformationCtrl($scope, $routeParams) {
     'age',
     'gender',
     'industry',
-    'birthLoc.country',
-    'currentLoc.state'
+    'nationality',
+    'state'
   ];
 
   var arc = d3.svg.arc()
@@ -200,57 +200,63 @@ function InformationCtrl($scope, $routeParams) {
     .innerRadius(0);
 
   var $container = $('.pie');
-  keys.forEach(function(key) {
-    var $div = $('<div class="pie-chart"><h4></h4><div class="graph"></div><div class="pieList"></div></div>');
-    $div.find('h4').text(key);
-    var mydata = aggregator(key);
-    mydata.sort(function(a, b) { return b.count - a.count; });
 
-    // Add the pie chart.
-    var pie = d3.layout.pie()
-      .sort(null)
-      .value(function(d) { return d.count; });
+  new Parse.Query(Parse.User)
+    .find()
+    .then(function(data) {
+      console.log(data);
+      keys.forEach(function(key) {
+        var $div = $('<div class="pie-chart"><h4></h4><div class="graph"></div><div class="pieList"></div></div>');
+        $div.find('h4').text(key);
+        var mydata = aggregator(data, key);
+        mydata.sort(function(a, b) { return b.count - a.count; });
 
-    var svg = d3.select($div.find('.graph')[0]).append('svg')
-        .attr('width', width)
-        .attr('height', height)
-      .append('g')
-        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+        // Add the pie chart.
+        var pie = d3.layout.pie()
+          .sort(null)
+          .value(function(d) { return d.count; });
 
-    var g = svg.selectAll('.arc')
-      .data(pie(mydata))
-      .enter().append('g')
-        .attr('class', 'arc');
+        var svg = d3.select($div.find('.graph')[0]).append('svg')
+            .attr('width', width)
+            .attr('height', height)
+          .append('g')
+            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
-    g.append('path')
-      .attr('d', arc)
-      .style('fill', function(d) { return color(d.data.value); });
+        var g = svg.selectAll('.arc')
+          .data(pie(mydata))
+          .enter().append('g')
+            .attr('class', 'arc');
 
-    g.filter(function(d) {
-        return d.data.p > 0.05;
-      })
-      .append('text')
-      .attr('transform', function(d) {
-        var c = arc.centroid(d);
-        var r = 2.35;
-        return 'translate(' + (c[0] * r) + ', ' + (c[1] * r) + ')';
-      })
-      .attr('dy', '.35em')
-      .style('text-anchor', 'left')
-      .text(function(d) { return d.data.text; });
+        g.append('path')
+          .attr('d', arc)
+          .style('fill', function(d) { return color(d.data.value); });
 
-    // Add a list of all values to the right.
-    var $list = $div.find('.pieList');
-    mydata.forEach(function(d) {
-      var $item = $('<div class="item"></div>');
-      $item.text(d.text);
-      $item.css('background-color', color(d.value));
-      $item.css('width',400*d.p+"px");
-      $list.append($item);
+        g.filter(function(d) {
+            return d.data.p > 0.05;
+          })
+          .append('text')
+          .attr('transform', function(d) {
+            var c = arc.centroid(d);
+            var r = 2.35;
+            return 'translate(' + (c[0] * r) + ', ' + (c[1] * r) + ')';
+          })
+          .attr('dy', '.35em')
+          .style('text-anchor', 'left')
+          .text(function(d) { return d.data.text; });
+
+        // Add a list of all values to the right.
+        var $list = $div.find('.pieList');
+        mydata.forEach(function(d) {
+          var $item = $('<div class="item"></div>');
+          $item.text(d.text);
+          $item.css('background-color', color(d.value));
+          $item.css('width',200*d.p+"px");
+          $list.append($item);
+        });
+
+        $container.append($div);
+      });
     });
-
-    $container.append($div);
-  });
 
 }
 

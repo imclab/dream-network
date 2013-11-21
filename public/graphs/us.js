@@ -25,7 +25,7 @@ window.USMap = function(selector) {
     .find()
     .then(function(data) {
       /*global aggregator */
-      data = aggregator(data, 'attributes.state');
+      data = aggregator(data, 'state');
       color.domain([
         d3.min(data, function(d) { return d.value; }),
         d3.max(data, function(d) { return d.value; })
