@@ -8,8 +8,8 @@ window.wordCloud = function(selector, words) {
     .rotate(function() { return ~~(Math.random() * 2) * 90; })
     .font('Impact')
     .fontSize(function(d) { return d.size; })
-    .on('end', function draw() {
-      d3.select('div#hobbies').append('svg')
+    .on('end', function draw(words) {
+      d3.select(selector).append('svg')
         .attr('width', 850)
         .attr('height', 400)
         .append('g')

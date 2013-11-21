@@ -112,7 +112,6 @@ function SearchCtrl($scope, $routeParams) {
   });
 
   $scope.searchUser = function() {
-    console.log('search user', $scope.query);
     var query = new Parse.Query(Parse.User);
     query.select("name","description", "fb_username","interests","nationality", "pic_cover");
     var queryResult = query.contains($scope.choices, $scope.query).find();
@@ -136,44 +135,6 @@ function SearchCtrl($scope, $routeParams) {
 }
 
 function InformationCtrl($scope, $routeParams) {
-    var interests = [];
-    var query = new Parse.Query(Parse.User);
-    query.select("interests");
-    query.each(function(result) {
-        interests = interests.concat(result.attributes.interests.split(','))
-    }).then(function() {
-            var fill = d3.scale.category20();
-            d3.layout.cloud().size([850, 300])
-                .words(interests.map(function(d) {
-                        return {text: d, size: 1 + Math.random() * 90};
-                    }))
-                .padding(3)
-                .rotate(function() { return ~~(Math.random() * 2) * 90; })
-                .font("Impact")
-                .fontSize(function(d) { return d.size; })
-                .on("end", draw)
-                .start();
-
-            function draw(words) {
-                d3.select("div#hobbies").append("svg")
-                    .attr("width", 850)
-                    .attr("height", 400)
-                    .append("g")
-                    .attr("transform", "translate(150,150)")
-                    .selectAll("text")
-                    .data(words)
-                    .enter().append("text")
-                    .style("font-size", function(d) { return d.size + "px"; })
-                    .style("font-family", "Impact")
-                    .style("fill", function(d, i) { return fill(i); })
-                    .attr("text-anchor", "middle")
-                    .attr("transform", function(d) {
-                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-                    })
-                    .text(function(d) { return d.text; });
-            }
-        });
-
   var width = 520;
   var height = 400;
   var radius = Math.min(width, height) / 2.3;
@@ -204,7 +165,17 @@ function InformationCtrl($scope, $routeParams) {
   new Parse.Query(Parse.User)
     .find()
     .then(function(data) {
-      console.log(data);
+      var interests = [];
+      data.forEach(function(d) {
+        interests = interests
+          .concat(d.attributes.interests
+            .split(',')
+            .map(function(v) { return v.trim(); })
+            .filter(function(v) { return v; })
+          );
+      });
+      wordCloud('div#hobbies', interests);
+
       keys.forEach(function(key) {
         var $div = $('<div class="pie-chart"><h4></h4><div class="graph"></div><div class="pieList"></div></div>');
         $div.find('h4').text(key);
@@ -260,10 +231,6 @@ function InformationCtrl($scope, $routeParams) {
 
 }
 
-
-
-
-
 function AboutCtrl($scope, $routeParams) {
 }
 
@@ -280,77 +247,4 @@ function UserCtrl($http, $location, $scope, $rootScope, userSrv) {
   $scope.logout = function() {
     userSrv.logout();
   }
-}
-
-
-
-
-/**
- * Returns a value from an object with dot notation.
- *
- * @param {Object} o
- * @param {String} key
- * @return {Object}
- */
-function getValue(o, key) {
-  var keys = key.split('.');
-  var curr = o;
-
-  for (var i = 0, len = keys.length; i < len; i++) {
-    curr = curr[keys[i]];
-  }
-
-  return curr;
-}
-
-
-/**
- * Aggregates seed data into an array of stat data.
- *
- * @param {String} key
- * @return {Object}
- *   {String} value
- *   {Number} count
- *   {String} percent
- *   {String} text
- */
-function aggregator(key) {
-  var map = {};
-  var total = 0;
-
-  window.data.forEach(function(d) {
-    var value = getValue(d, key);
-    var values = typeof value === 'string'
-      ? value.split(',').map(function(v) { return v.trim(); })
-      : [value];
-
-    values.forEach(function(value) {
-      if (value) {
-        if (map[value]) {
-          map[value]++;
-        } else {
-          map[value] = 1;
-        }
-        total++;
-      }
-    });
-  });
-
-  var arr = [];
-  var i = 0;
-  for (var value in map) {
-    var count = map[value];
-    var p1 = count / total;
-    var p2 = p1 * 100;
-    var percent = (p2 % 0.5 === 0 ? Math.floor(p2) : Math.round(p2)) + '%';
-    arr[i++] = {
-      value: value,
-      count: count,
-      p: p1,
-      percent: percent,
-      text: value + ' (' + percent + ')'
-    };
-  }
-
-  return arr;
 }
