@@ -203,7 +203,8 @@ function InformationCtrl($scope, $routeParams) {
   keys.forEach(function(key) {
     var $div = $('<div class="pie-chart"><h4></h4><div class="graph"></div><div class="pieList"></div></div>');
     $div.find('h4').text(key);
-    var mydata = aggregator(key);
+    return;
+    var mydata = aggregator(window.data, key);
     mydata.sort(function(a, b) { return b.count - a.count; });
 
     // Add the pie chart.
@@ -274,77 +275,4 @@ function UserCtrl($http, $location, $scope, $rootScope, userSrv) {
   $scope.logout = function() {
     userSrv.logout();
   }
-}
-
-
-
-
-/**
- * Returns a value from an object with dot notation.
- *
- * @param {Object} o
- * @param {String} key
- * @return {Object}
- */
-function getValue(o, key) {
-  var keys = key.split('.');
-  var curr = o;
-
-  for (var i = 0, len = keys.length; i < len; i++) {
-    curr = curr[keys[i]];
-  }
-
-  return curr;
-}
-
-
-/**
- * Aggregates seed data into an array of stat data.
- *
- * @param {String} key
- * @return {Object}
- *   {String} value
- *   {Number} count
- *   {String} percent
- *   {String} text
- */
-function aggregator(key) {
-  var map = {};
-  var total = 0;
-
-  window.data.forEach(function(d) {
-    var value = getValue(d, key);
-    var values = typeof value === 'string'
-      ? value.split(',').map(function(v) { return v.trim(); })
-      : [value];
-
-    values.forEach(function(value) {
-      if (value) {
-        if (map[value]) {
-          map[value]++;
-        } else {
-          map[value] = 1;
-        }
-        total++;
-      }
-    });
-  });
-
-  var arr = [];
-  var i = 0;
-  for (var value in map) {
-    var count = map[value];
-    var p1 = count / total;
-    var p2 = p1 * 100;
-    var percent = (p2 % 0.5 === 0 ? Math.floor(p2) : Math.round(p2)) + '%';
-    arr[i++] = {
-      value: value,
-      count: count,
-      p: p1,
-      percent: percent,
-      text: value + ' (' + percent + ')'
-    };
-  }
-
-  return arr;
 }
