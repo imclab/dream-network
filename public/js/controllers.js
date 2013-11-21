@@ -1,4 +1,4 @@
-function HomeCtrl($scope, $routeParams) {
+function HomeCtrl($scope, $location, $routeParams) {
   var query = new Parse.Query(Parse.User);
   query.count({
     success: function(number) {
@@ -26,6 +26,11 @@ function HomeCtrl($scope, $routeParams) {
       });
     }
   });
+
+
+  $scope.signUp = function () {
+    $location.path('/signup');
+  }
 }
 
 function ProfileCtrl($scope, $routeParams, userSrv) {
