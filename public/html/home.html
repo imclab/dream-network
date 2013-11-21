@@ -27,7 +27,7 @@
         <a href="#profile/{{randomUser.id}}"><img class="featurette-image img-responsive" src="https://graph.facebook.com/{{randomUser.fbUsername}}/picture?width=200&height=200"></a>
       </div>
       <div class="userContent col-xs-7">
-        <a href="#profile/{{randomUser.id}}" class="featurette-heading"><h2>{{randomUser.name}}</h2></a>
+        <a href="#profile/{{randomUser.id}}" class="featurette-heading"><h2>{{randomUser.name}}</h2></a>&nbsp&nbsp&nbsp<a href="http://facebook.com/{{randomUser.fbUsername}}"><img src="img/fb_logo.jpeg" style="position:relative;top:-10px"></a>
           <h4>
             Description: {{randomUser.description}}<button type="button" class="btn btn-primary" ng-click="signUp()" ng-hide="userLoggedIn" style="float:right">Connect with {{randomUser.name}}!</button><br> 
             Nationality: {{randomUser.nationality}}<br>
