@@ -29,14 +29,14 @@
 						.attr("width", width)
 						.attr("height", height);
 
-			d3.csv("currentlocation.csv", function(data) {
+			d3.csv("/data/currentlocation.csv", function(data) {
 
 				color.domain([
 					d3.min(data, function(d) { return d.value; }), 
 					d3.max(data, function(d) { return d.value; })
 				]);
 
-				d3.json("us-states.json", function(json) {
+				d3.json("/data/us-states.json", function(json) {
 
 					//Combine the current location data and GeoJSON
 					for (var i = 0; i < data.length; i++) {

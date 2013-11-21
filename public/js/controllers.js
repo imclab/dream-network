@@ -24,7 +24,7 @@ function HomeCtrl($scope, $location, $routeParams) {
                 };
               });
             }
-          })
+          });
         });
       }
     });
@@ -35,7 +35,10 @@ function HomeCtrl($scope, $location, $routeParams) {
   $scope.signUp = function () {
     $location.path('/signup');
   }
+
+  worldGraph('.world-graph');
 }
+
 
 function ProfileCtrl($scope, $routeParams, userSrv) {
   //Check if profile is self
