@@ -3,7 +3,7 @@
     <h2>Meet The DREAMers of America</h2>
     <p>{{userCount}} DREAMers and counting!</p>
     <div class="progress">
-      <div class="progress-bar progress-bar-danger" style="width:{{progressPercent}}%;"></div>
+      <div class="progress-bar progress-bar-danger" style="width:{{progressPercent}}%;">{{userCount}}</div><p style="float:right">{{goal}}&nbsp</p>
     </div>
     <button type="button" class="btn btn-primary btn-lg" ng-click="signUp()" ng-hide="userLoggedIn">Join the Dream!</button>
   </div>
@@ -29,7 +29,7 @@
       <div class="userContent col-xs-7">
         <a href="#profile/{{randomUser.id}}" class="featurette-heading"><h2>{{randomUser.name}}</h2></a>
           <h4>
-            Description: {{randomUser.description}}<br>
+            Description: {{randomUser.description}}<button type="button" class="btn btn-primary" ng-click="signUp()" ng-hide="userLoggedIn" style="float:right">Connect with {{randomUser.name}}!</button><br> 
             Nationality: {{randomUser.nationality}}<br>
             Interests: {{randomUser.interests}}<br>
           </h4>

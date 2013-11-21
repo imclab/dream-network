@@ -285,3 +285,38 @@ a:hover {
 	position: relative;
 	left:200px;
 }
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+#signup-container .left, #signup-container .right {
+	padding: 36px;
+}
+
+#signup-container .left{
+	border-right: 1px solid black;
+}
+#signup-container {
+	margin: 0 auto;
+	width: 501px;
+	background-color: #C2DAEA;
+	border-radius: 5px 5px 5px 5px;
+	height: 150px;
+}
+
+#signup-container button {
+	background-color: #2185C5;
+	border: 1px solid #2185C5;
+	color: white;
+}
+
+#signup-container button:hover {
+	background-color: #7ECEFD;
+	color: white;
+	border: 1px solid #7ECEFD;
+}

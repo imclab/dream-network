@@ -1,9 +1,19 @@
 <div class="container">
-  <h2 class="signup-form-heading text-center">Sign Up</h2>
-  <div class="jumbotron">
-  </div>
+  <h2 class="signup-form-heading text-center" ng-hide="userLoggedIn">Sign Up</h2>
 
-  <div class="row text-center">
-    <button class="btn btn-lg btn-primary text-center" ng-click="signup()">Sign Up With Facebook</button>
+  <div id="signup-container" ng-hide="userLoggedIn">
+  	<div class="left">
+  		New to the Dream Network?<br>
+  		<button type="button" class="btn btn-primary btn-sm" ng-click="signup()" style="float:right">Sign up with Facebook</button>
+  	</div>
+  	<div class="right">
+  		Already a Member?<br>
+  		<button type="button" class="btn btn-primary btn-sm" ng-click="login()" style="float:right">Log in with Facebook</button>
+  	</div>
+  </div>
+  <div ng-show="userLoggedIn" align="center">
+  	<h1 >
+  		You're already logged in!
+  	</h1>
   </div>
 </div>
