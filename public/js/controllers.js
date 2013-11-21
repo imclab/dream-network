@@ -6,6 +6,23 @@ function HomeCtrl($scope, $routeParams) {
         $scope.userCount = number;
         $scope.goal = 100;
         $scope.progressPercent = number * 100 / $scope.goal;
+        var randomUserIndex = Math.floor(Math.random()*$scope.userCount);
+        var randUserQuery = new Parse.Query(Parse.User);
+        query.select("id","name","description", "fb_username","interests","nationality");
+        randUserQuery.skip(randomUserIndex).first({
+          success: function(object) {
+            $scope.$apply(function() {
+              $scope.randomUser = {
+                id : object.id,
+                description : object.get("description"),
+                fbUsername : object.get("fb_username"),
+                name : object.get("name"),
+                interests : object.get("interests"),
+                nationality : object.get("nationality")
+              };
+            });
+          }
+        })
       });
     }
   });
