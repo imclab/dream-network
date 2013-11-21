@@ -1,5 +1,4 @@
 function HomeCtrl($scope, $location, $routeParams) {
-
   $scope.fetchRandomDreamer = function () {
     var query = new Parse.Query(Parse.User);
     query.count({
@@ -11,6 +10,9 @@ function HomeCtrl($scope, $location, $routeParams) {
           var randomUserIndex = Math.floor(Math.random()*$scope.userCount);
           var randUserQuery = new Parse.Query(Parse.User);
           query.select("id","name","description", "fb_username","interests","nationality");
+          $('#load-container').css('display','block');
+          $('.userContent').css('display','none');
+          $('#shell').css('height','200px');
           randUserQuery.skip(randomUserIndex).first({
             success: function(object) {
               $scope.$apply(function() {
@@ -23,6 +25,9 @@ function HomeCtrl($scope, $location, $routeParams) {
                   nationality : object.get("nationality")
                 };
               });
+              $('#load-container').css('display','none');
+              $('#shell').css('height','0');
+              $('.userContent').css('display','block');
             }
           });
         });

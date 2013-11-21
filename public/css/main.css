@@ -259,3 +259,20 @@ a:hover {
 .jumbotron.world-map, .jumbotron.us-map {
   background: transparent;
 }
+
+
+#loading {
+		left:435px;
+		top:50px;
+    position: relative;
+}
+
+#load-container {
+	z-index: 10;
+	//background-color: black;
+	//opacity :.5;
+  height: 200px;
+  position: absolute;
+  width: 970px;
+  display:none;
+}

@@ -18,18 +18,22 @@
     </div>
   </div>
   <hr class="featurette-divider">
-    <div class="user-result row" ng-show="randomUser.fbUsername">
-        <div class="col-xs-5">
-          <a href="#profile/{{randomUser.id}}"><img class="featurette-image img-responsive" src="https://graph.facebook.com/{{randomUser.fbUsername}}/picture?width=200&height=200"></a>
-        </div>
-        <div class="col-xs-7">
-          <a href="#profile/{{randomUser.id}}" class="featurette-heading"><h2>{{randomUser.name}}</h2></a>
+    <div class="row" ng-show="randomUser.fbUsername">
+      <div id="load-container">
+        <img id="loading" src="img/loading.gif"/>
+      </div>
+      <div id="shell"></div>
+      <div class="userContent col-xs-5">
+        <a href="#profile/{{randomUser.id}}"><img class="featurette-image img-responsive" src="https://graph.facebook.com/{{randomUser.fbUsername}}/picture?width=200&height=200"></a>
+      </div>
+      <div class="userContent col-xs-7">
+        <a href="#profile/{{randomUser.id}}" class="featurette-heading"><h2>{{randomUser.name}}</h2></a>
           <p>
             Description: {{randomUser.description}}<br>
             Nationality: {{randomUser.nationality}}<br>
             Interests: {{randomUser.interests}}<br>
           </p>
-        </div>
+      </div>
     </div>
     <hr class="featurette-divider">
     <div class="row">
