@@ -148,7 +148,7 @@ function PieCtrl($http, $location, $scope, $rootScope, userSrv) {
 
   var $container = $('.pie');
   keys.forEach(function(key) {
-    var $div = $('<div class="pie"><h4></h4><div class="graph"></div><div class="list"></div></div>');
+    var $div = $('<div class="pie-chart"><h4></h4><div class="graph"></div><div class="list"></div></div>');
     $div.find('h4').text(key);
     var mydata = aggregator(key);
     mydata.sort(function(a, b) { return b.count - a.count; });
