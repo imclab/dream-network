@@ -131,7 +131,6 @@ function InformationCtrl($scope, $routeParams) {
                 .start();
 
             function draw(words) {
-                console.log(interests)
                 d3.select("div#hobbies").append("svg")
                     .attr("width", 850)
                     .attr("height", 300)
