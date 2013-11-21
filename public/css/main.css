@@ -269,10 +269,19 @@ a:hover {
 
 #load-container {
 	z-index: 10;
-	//background-color: black;
-	//opacity :.5;
   height: 200px;
   position: absolute;
   width: 970px;
   display:none;
+}
+
+.us-map svg {
+	position: relative;
+	left: 160px;
+}
+
+#hobbies svg {
+	overflow: visible;
+	position: relative;
+	left:200px;
 }

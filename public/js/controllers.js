@@ -139,7 +139,7 @@ function InformationCtrl($scope, $routeParams) {
             function draw(words) {
                 d3.select("div#hobbies").append("svg")
                     .attr("width", 850)
-                    .attr("height", 300)
+                    .attr("height", 400)
                     .append("g")
                     .attr("transform", "translate(150,150)")
                     .selectAll("text")
