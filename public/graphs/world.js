@@ -1,4 +1,4 @@
-function worldMap(selector) {
+window.worldMap = function(selector) {
   // Width and height
   var width = 800;
   var height = 400;
@@ -10,7 +10,6 @@ function worldMap(selector) {
 
   var path = d3.geo.path()
     .projection(projection);
-  var graticule = d3.geo.graticule();
 
   var color = d3.scale.quantize()
     .range(['rgb(237,248,233)','rgb(186,228,179)','rgb(116,196,118)','rgb(49,163,84)','rgb(0,109,44)']);
@@ -20,7 +19,12 @@ function worldMap(selector) {
     .attr('width', width)
     .attr('height', height);
 
-  d3.csv('/data/birthlocation.csv', function(data) {
+  new Parse.Query(Parse.User)
+    .select('nationality')
+    .find()
+    .then(function(data) {
+      /*global aggregator */
+      data = aggregator(data, 'attributes.nationality');
     color.domain([
       d3.min(data, function(d) { return d.value; }),
       d3.max(data, function(d) { return d.value; })
@@ -31,8 +35,9 @@ function worldMap(selector) {
     //Combine the current location data and GeoJSON
     for (var i = 0; i < data.length; i++) {
   
-      var dataState = data[i].country;
-      var dataValue = parseFloat(data[i].value);
+      var d = data[i];
+      var dataState = d.value;
+      var dataValue = parseFloat(d.count);
       for (var j = 0; j < json.features.length; j++) {
         var jsonState = json.features[j].properties.name;
         if (dataState === jsonState) {
@@ -60,4 +65,4 @@ function worldMap(selector) {
       .text(function(d) { return d.properties.name; });
     });
   });
-}
+};
