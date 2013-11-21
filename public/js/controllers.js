@@ -46,7 +46,7 @@ function SearchCtrl($scope, $routeParams) {
 
   $scope.searchUser = function() {
     var query = new Parse.Query(Parse.User);
-    query.select("name","description", "fb_username");
+    query.select("name","description", "fb_username","interests","nationality");
     var queryResult = query.contains($scope.choices, $scope.query).find();
     queryResult.then(function(results) {
       $scope.$apply(function(){
@@ -57,7 +57,9 @@ function SearchCtrl($scope, $routeParams) {
             id : object.id,
             description : object.get("description"),
             fbUsername : object.get("fb_username"),
-            name : object.get("name")
+            name : object.get("name"),
+            interests : object.get("interests"),
+            nationality : object.get("nationality")
           });
         });
       });

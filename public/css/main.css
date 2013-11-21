@@ -102,6 +102,15 @@ body {
 }
 
 a {
+	color:#7ECEFD;
+}
+
+a:hover {
+	color:#2185C5;
+	text-decoration: none;
+}
+
+.navbar a {
     color: #FFF6E5;
 }
 
@@ -147,11 +156,15 @@ a {
     color: #FFF;
 }
 
+
+.form-control {
+	color: #2185C5;
+}
 .form-control:focus {
     border-color: #FF7F66;
 }
 
-.container .row:nth-child(2){
+#search-bar {
 	padding: 10px 20px;
 	background-color: #C2DAEA;
 	border-radius : 10px;
@@ -161,7 +174,7 @@ a {
 	background-color: transparent;
 	border : none;
 }
-.col-xs-2{
+.col-xs-2 {
 	padding-right: 0px;
 	background: #ffffff; /* Old browsers */
 	background: -moz-linear-gradient(top,  #ffffff 0%, #b5b5b5 100%); /* FF3.6+ */
@@ -173,10 +186,37 @@ a {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#b5b5b5',GradientType=0 ); /* IE6-9 */
 }
 
-.col-xs-7 .form-control{
+.col-xs-2 select {
+	background-color: #FFF;
+}
+
+.col-xs-7 .form-control {
 	border-radius: 0px 2px 2px 0px;
 }
 
-.col-xs-7{
+.col-xs-7 {
 	padding-left: 0px;
+}
+
+.col-xs-3 .btn {
+	border-radius: 12px;
+	box-shadow: -1px 3px 3px #000;
+}
+
+.featurette-heading h2 {
+	display: inline;
+}
+
+.ng-scope .col-xs-5 img {
+	border: 1px #FFF;
+}
+
+.col-xs-5 img:hover {
+	border: 1px #FF7F66;
+}
+
+.user-result {
+	padding: 10px;
+	border: 1px solid #FF7F66;
+	border-radius: 5px 5px 5px 5px;
 }
