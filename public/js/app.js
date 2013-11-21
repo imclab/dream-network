@@ -9,6 +9,7 @@ angular.module('dreamnetwork', ['ngResource', 'ngRoute', 'infinite-scroll'])
       when('/about', {templateUrl: 'html/about.html', controller: AboutCtrl}).
       when('/signup', {templateUrl: 'html/signup.html', controller: UserCtrl}).
       when('/login', {templateUrl: 'html/login.html', controller: UserCtrl}).
+      when('/pie', {templateUrl: 'html/pie.html', controller: PieCtrl}).
       otherwise({redirectTo: '/home'});
   }])
   .run(function($rootScope, userSrv) {

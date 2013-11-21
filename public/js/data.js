@@ -161,7 +161,7 @@ window.data = [
     school: 'UC Davis',
     birthLoc: { city: 'Seoul', country: 'South Korea' },
     currentLoc: { city: 'Davis', state: 'California' },
-    industry: 'tech, software',
+    industry: 'technology, software',
     prefProgLang: '',
     fluentLang: 'english, korean',
     isupport: 'My family, my younger sister deserve better. They work extremely hard for their communitites. WE want to be represented fairly. We went through the immigration process legally but was scammed by our green card sponsor.',
