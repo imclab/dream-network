@@ -94,7 +94,25 @@ function SearchCtrl($scope, $routeParams) {
   $scope.displayingResults=false;
   $scope.choices = "interests";
 
+  var busy = false;
+  var tid;
+  $scope.$watch("query", function(query) {
+    if (typeof query !== "undefined") {
+      if (!busy) {
+        $scope.searchUser();
+      } else {
+        clearTimeout(tid);
+        tid = setTimeout(function() {
+          $scope.searchUser();
+          busy = false;
+        }, 500);
+      }
+      busy = true;
+    }
+  });
+
   $scope.searchUser = function() {
+    console.log('search user', $scope.query);
     var query = new Parse.Query(Parse.User);
     query.select("name","description", "fb_username","interests","nationality", "pic_cover");
     var queryResult = query.contains($scope.choices, $scope.query).find();
