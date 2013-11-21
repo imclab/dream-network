@@ -165,16 +165,7 @@ function InformationCtrl($scope, $routeParams) {
   new Parse.Query(Parse.User)
     .find()
     .then(function(data) {
-      var interests = [];
-      data.forEach(function(d) {
-        interests = interests
-          .concat(d.attributes.interests
-            .split(',')
-            .map(function(v) { return v.trim(); })
-            .filter(function(v) { return v; })
-          );
-      });
-      wordCloud('div#hobbies', interests);
+      wordCloud('div#hobbies', getWords(',', data, 'interests'));
 
       keys.forEach(function(key) {
         var $div = $('<div class="pie-chart"><h4></h4><div class="graph"></div><div class="pieList"></div></div>');

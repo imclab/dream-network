@@ -82,3 +82,22 @@ window.aggregator = function(data, key) {
 
   return arr;
 };
+
+
+/**
+ * @param {String|RegExp} sep
+ * @param {Array.<Object>} list
+ * @param {String} key
+ */
+window.getWords = function(sep, list, key) {
+  var arr = [];
+  list.forEach(function(d) {
+    arr = arr
+      .concat(d.attributes[key]
+        .split(sep)
+        .map(function(v) { return v.trim(); })
+        .filter(function(v) { return v; })
+      );
+  });
+  return arr;
+};
