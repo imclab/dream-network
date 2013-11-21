@@ -255,3 +255,7 @@ a:hover {
 	position: relative;
 	top:10px;
 }
+
+.jumbotron.world-map, .jumbotron.us-map {
+  background: transparent;
+}

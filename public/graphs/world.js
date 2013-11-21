@@ -1,7 +1,7 @@
 function worldMap(selector) {
   // Width and height
   var width = 800;
-  var height = 600;
+  var height = 400;
 
   // Map projection
   var projection = d3.geo.mercator()
@@ -15,7 +15,7 @@ function worldMap(selector) {
   var color = d3.scale.quantize()
     .range(['rgb(237,248,233)','rgb(186,228,179)','rgb(116,196,118)','rgb(49,163,84)','rgb(0,109,44)']);
 
-  var svg = d3.select('body')
+  var svg = d3.select(selector)
     .append('svg')
     .attr('width', width)
     .attr('height', height);
