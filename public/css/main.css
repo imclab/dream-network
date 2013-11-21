@@ -236,3 +236,11 @@ a:hover {
 .progress {
     height: 40px;
 }
+
+.arc path {
+  stroke: #fff;
+}
+
+.arc text {
+  text-shadow: 0 0 5px #ccc;
+}
