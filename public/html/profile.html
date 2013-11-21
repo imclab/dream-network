@@ -1,5 +1,10 @@
-<div class="jumbotron">
-  <div class="container">
+<div class="container">
+  <div class="jumbotron" style="background-image: url({{user.coverPhotoUrl}});
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      height: 260px;
+      width: 940px;">
     <div class="row">
       <div class="col-xs-3">
         <img class="featurette-image img-responsive" src="https://graph.facebook.com/{{user.fbUsername}}/picture?width=200&height=200"  alt="Generic placeholder image">
@@ -8,9 +13,9 @@
       </div>
       <div class="col-xs-8">
         <br>
-        <h2>{{user.name}}</h2>
-        <p>{{user.age}}, {{user.gender}}</p>
-        <p>{{user.state}}</p>
+        <div class="row"><p style="background-color: rgba(255,255,255,0.5); display: inline">{{user.name}}</p></div>
+        <div class="row"><p style="background-color: rgba(255,255,255,0.5); display: inline">{{user.age}}, {{user.gender}}</p></div>
+        <div class="row"><p style="background-color: rgba(255,255,255,0.5); display: inline">{{user.state}}</p></div>
       </div>
     </div>
   </div>
