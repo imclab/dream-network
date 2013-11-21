@@ -61,7 +61,8 @@
   <div class="row">
     <div class="col-xs-12">
       <h2 class="featurette-heading">Country of Birth</h2>
-      <select ng-model="user.nationality" name="Country">
+      <div ng-hide="editable">{{user.nationality}}</div>
+      <select ng-model="user.nationality" name="Country" ng-show="editable">
       <option value="United States">United States</option>
       <option value="United Kingdom">United Kingdom</option>
       <option value="Afghanistan">Afghanistan</option>
