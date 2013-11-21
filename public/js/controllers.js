@@ -1,4 +1,14 @@
 function HomeCtrl($scope, $routeParams) {
+  var query = new Parse.Query(Parse.User);
+  query.count({
+    success: function(number) {
+      $scope.$apply(function() {
+        $scope.userCount = number;
+        $scope.goal = 100;
+        $scope.progressPercent = number * 100 / $scope.goal;
+      });
+    }
+  });
 }
 
 function ProfileCtrl($scope, $routeParams, userSrv) {
