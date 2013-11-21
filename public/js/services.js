@@ -11,7 +11,9 @@ angular.module('dreamnetwork')
         $location.path('profile/' + currentUser.id);
       } else {
 
-        Parse.FacebookUtils.logIn("user_location,user_interests,user_education_history,user_work_history,user_about_me,user_birthday", {
+        Parse.FacebookUtils.logIn("user_location,user_hometown, \
+                                  user_interests,user_education_history, \
+                                  user_about_me,user_birthday", {
           success: function(user) {
            $rootScope.$apply(function () {
               $rootScope.userLoggedIn = true;
@@ -22,24 +24,34 @@ angular.module('dreamnetwork')
 	      query.get(user.id).then(function(user) {
                 if (!user.get('first_time')) {
                  FB.api({
-                   method: 'fql.query',
-                   query: 'SELECT name, sex, birthday, current_location, work, education, about_me, interests, username, pic_cover FROM user WHERE uid = me()'
-                    }, function(response) {
-                   response = response[0];
+                   method: 'fql.multiquery',
+                   queries: {
+                       'query1': "SELECT name, sex, birthday, current_location, \
+                          education, about_me, interests, username, \
+                          pic_cover, hometown_location, languages \
+                          FROM user WHERE uid = me()",
+                       'query2': 'SELECT url FROM profile WHERE id = me()'
+                    }
+                 }, function(response) {
+                   userResponse = response[0].fql_result_set[0];
+                   profileResponse = response[1].fql_result_set[0];
+
                    user.set("first_time", true);
-                   user.set('name', response.name);
-                   user.set('gender', response.sex);
-                   user.set("age", getAge(response.birthday));
-                   user.set('state', response.current_location.state);
-                   user.set('profession', getFBProfession(response.work));
-                   user.set('high_school', getFBEducation(response.education, "High School"));
-                   user.set('college', getFBEducation(response.education, "College"));
-                   user.set('major', getFBMajors(response.education));
-                   user.set('fb_url', response.link);
-                   user.set('interests', response.interests);
-                   user.set('description', response.about_me);
-                   user.set('fb_username', response.username);
-                   user.set('pic_cover', response.pic_cover);
+                   user.set('name', userResponse.name);
+                   user.set('gender', userResponse.sex);
+                   user.set("age", getAge(userResponse.birthday));
+                   user.set('state', userResponse.current_location.state);
+                   user.set('education', getFBEducation(userResponse.education));
+                   user.set('major', getFBMajors(userResponse.education));
+                   user.set('interests', userResponse.interests);
+                   user.set('description', userResponse.about_me);
+                   user.set('fb_username', userResponse.username);
+                   user.set('high_school', getFBEducation(userResponse.education, "High School"));
+                   user.set('college', getFBEducation(userResponse.education, "College"));
+                   user.set('pic_cover', userResponse.pic_cover);
+                   user.set('fb_url', profileResponse.url);
+                   user.set('languages', getFBLanguages(profileResponse.languages));
+                   user.set('home_country', getFBHomeCountry(profileResponse.hometown_location));
 
                    user.save(null, {
                      success: function(data) {

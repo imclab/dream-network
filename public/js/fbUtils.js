@@ -1,13 +1,3 @@
-var getFBProfession = function(work_history) {
-  var professions = [];
-  work_history.forEach(function(job) {
-    if (job['position'] && !job['end_date']) {
-     professions.push(job['position']['name']);
-    };
-  });
-  return professions.length ? professions.join(', ') : undefined;
-}
-
  var getFBEducation = function(education_history, type) {
   var schools = [];
   education_history.forEach(function(education_event) {
@@ -28,4 +18,15 @@ var getFBMajors = function(education_history) {
     }
    });
   return majors.length ? majors.join(', ') : undefined;
+}
+
+var getFBHomeCountry = function(hometown_location) {
+  if (!hometown_location) {
+   return null;
+  }
+  return hometown_location['country'];
+}
+
+var getFBLanguages = function(user_languages) {
+  return user_languages.map(function(l) { return l['name'] }).join(', ');
 }

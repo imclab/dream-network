@@ -16,12 +16,14 @@ function ProfileCtrl($scope, $routeParams, userSrv) {
         description: user.get('description'),
         high_school: user.get('high_school'),
         college: user.get('college'),
-        profession: user.get('profession'),
+        industry: user.get('industry'),
         nationality: user.get('nationality'),
         interests: user.get('interests'),
         gender: user.get('gender'),
         state: user.get('state'),
-        age: user.get('age')
+        age: user.get('age'),
+        languages: user.get('languages'),
+        support_reason: user.get('support_reason')
       }
 
       //setup watches
@@ -30,9 +32,11 @@ function ProfileCtrl($scope, $routeParams, userSrv) {
         userSrv.currentUser.set('description', newValue.description);
         userSrv.currentUser.set('high_school', newValue.high_school);
         userSrv.currentUser.set('college', newValue.college);
-        userSrv.currentUser.set('profession', newValue.profession);
+        userSrv.currentUser.set('industry', newValue.industry);
         userSrv.currentUser.set('nationality', newValue.nationality);
         userSrv.currentUser.set('interests', newValue.interests);
+        userSrv.currentUser.set('languages', newValue.languages);
+        userSrv.currentUser.set('support_reason', newValue.support_reason);
         userSrv.currentUser.save();
       }, true);
     });
