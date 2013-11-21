@@ -28,5 +28,7 @@ var getFBHomeCountry = function(hometown_location) {
 }
 
 var getFBLanguages = function(user_languages) {
-  return user_languages.map(function(l) { return l['name'] }).join(', ');
+  return user_languages
+    ? user_languages.map(function(l) { return l['name'] }).join(', ')
+    : '';
 }
