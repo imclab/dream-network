@@ -191,10 +191,6 @@ a:hover {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#b5b5b5',GradientType=0 ); /* IE6-9 */
 }
 
-.col-xs-2 select {
-	background-color: #FFF;
-}
-
 .col-xs-7 .form-control {
 	border-radius: 0px 2px 2px 0px;
 }
@@ -243,4 +239,19 @@ a:hover {
 
 .arc text {
   text-shadow: 0 0 5px #ccc;
+  z-index: 10;
+}
+.graph, .pieList {
+	display:inline-block;
+}
+
+.pieList {
+	position:	relative;
+	top: -41px;
+}
+
+.pie-chart {
+	color: grey;
+	position: relative;
+	top:10px;
 }

@@ -167,8 +167,8 @@ function UserCtrl($http, $location, $scope, $rootScope, userSrv) {
 
 function PieCtrl($http, $location, $scope, $rootScope, userSrv) {
   var width = 520;
-  var height = 360;
-  var radius = Math.min(width, height) / 2;
+  var height = 400;
+  var radius = Math.min(width, height) / 2.3;
 
   var colors = [
     '#3E454C', // Charcoal
@@ -193,7 +193,7 @@ function PieCtrl($http, $location, $scope, $rootScope, userSrv) {
 
   var $container = $('.pie');
   keys.forEach(function(key) {
-    var $div = $('<div class="pie-chart"><h4></h4><div class="graph"></div><div class="list"></div></div>');
+    var $div = $('<div class="pie-chart"><h4></h4><div class="graph"></div><div class="pieList"></div></div>');
     $div.find('h4').text(key);
     var mydata = aggregator(key);
     mydata.sort(function(a, b) { return b.count - a.count; });
@@ -232,11 +232,12 @@ function PieCtrl($http, $location, $scope, $rootScope, userSrv) {
       .text(function(d) { return d.data.text; });
 
     // Add a list of all values to the right.
-    var $list = $div.find('.list');
+    var $list = $div.find('.pieList');
     mydata.forEach(function(d) {
       var $item = $('<div class="item"></div>');
       $item.text(d.text);
       $item.css('background-color', color(d.value));
+      $item.css('width',200/(d.p*100)+"px");
       $list.append($item);
     });
 
