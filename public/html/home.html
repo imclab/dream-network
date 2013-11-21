@@ -11,8 +11,11 @@
 <div class="container">
   <div class="row" ng-show="randomUser.fbUsername">
     <h2 class="text-center">
-      DREAMer: insert definition here. copy copy copy.
+      DREAMer: An highly skilled and resourceful individual who wants to be a part of the United States. Meet a DREAMer below.
     </h2>
+    <div class="row text-center">
+      <button type="button" class="btn btn-primary btn-lg" ng-click="fetchRandomDreamer()">Meet Another DREAMer</button>
+    </div>
   </div>
   <hr class="featurette-divider">
     <div class="user-result row" ng-show="randomUser.fbUsername">
