@@ -245,7 +245,7 @@ function InformationCtrl($scope, $routeParams) {
       var $item = $('<div class="item"></div>');
       $item.text(d.text);
       $item.css('background-color', color(d.value));
-      $item.css('width',200*d.p+"px");
+      $item.css('width',400*d.p+"px");
       $list.append($item);
     });
 
