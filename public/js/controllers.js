@@ -36,7 +36,8 @@ function HomeCtrl($scope, $location, $routeParams) {
     $location.path('/signup');
   }
 
-  worldGraph('.world-graph');
+  USMap('.us-map');
+  worldMap('.world-map');
 }
 
 
