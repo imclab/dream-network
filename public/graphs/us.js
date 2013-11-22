@@ -27,8 +27,8 @@ window.USMap = function(selector) {
       /*global aggregator */
       data = aggregator(data, 'state');
       color.domain([
-        d3.min(data, function(d) { return d.value; }),
-        d3.max(data, function(d) { return d.value; })
+        d3.min(data, function(d) { return d.count; }),
+        d3.max(data, function(d) { return d.count; })
       ]);
 
       d3.json('/data/us-states.json', function(json) {

@@ -25,44 +25,44 @@ window.worldMap = function(selector) {
     .then(function(data) {
       /*global aggregator */
       data = aggregator(data, 'nationality');
-    color.domain([
-      d3.min(data, function(d) { return d.value; }),
-      d3.max(data, function(d) { return d.value; })
-    ]);
+      color.domain([
+        d3.min(data, function(d) { return d.count; }),
+        d3.max(data, function(d) { return d.count; })
+      ]);
 
-    d3.json('/data/countries.geo.json', function(json) {
+      d3.json('/data/countries.geo.json', function(json) {
 
-    //Combine the current location data and GeoJSON
-    for (var i = 0; i < data.length; i++) {
-  
-      var d = data[i];
-      var dataState = d.value;
-      var dataValue = parseFloat(d.count);
-      for (var j = 0; j < json.features.length; j++) {
-        var jsonState = json.features[j].properties.name;
-        if (dataState === jsonState) {
-          json.features[j].properties.value = dataValue;
-          break;
+      //Combine the current location data and GeoJSON
+      for (var i = 0; i < data.length; i++) {
+    
+        var d = data[i];
+        var dataState = d.value;
+        var dataValue = parseFloat(d.count);
+        for (var j = 0; j < json.features.length; j++) {
+          var jsonState = json.features[j].properties.name;
+          if (dataState === jsonState) {
+            json.features[j].properties.value = dataValue;
+            break;
+          }
         }
       }
-    }
 
-    //Bind the data and create a path per GeoJSON feature
-    svg.selectAll('path')
-       .data(json.features)
-       .enter()
-       .append('path')
-       .attr('d', path)
-       .style('fill', function(d) {
-          var value = d.properties.value;
-          if (value) {
-            return color(value);
-          } else {
-            return '#ccc';
-          }
-        })
-      .append('svg:title')
-      .text(function(d) { return d.properties.name; });
-    });
+      //Bind the data and create a path per GeoJSON feature
+      svg.selectAll('path')
+         .data(json.features)
+         .enter()
+         .append('path')
+         .attr('d', path)
+         .style('fill', function(d) {
+            var value = d.properties.value;
+            if (value) {
+              return color(value);
+            } else {
+              return '#ccc';
+            }
+          })
+        .append('svg:title')
+        .text(function(d) { return d.properties.name; });
+      });
   });
 };
